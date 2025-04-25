@@ -2732,7 +2732,7 @@ HAL_StatusTypeDef HAL_SPI_Abort_IT(SPI_HandleTypeDef *hspi)
       }
       count--;      // Moved as part of the fix for the underflow
     } while (HAL_IS_BIT_SET(hspi->Instance->IER, SPI_IT_EOT));
-    count = resetcount;     // Reset the count back to full for next loop part of the underflow fix
+    count = resetcount;     // Reset the count to its full value for the next loop as part of the underflow fix.
 
     /* Request a Suspend transfer */
     SET_BIT(hspi->Instance->CR1, SPI_CR1_CSUSP);
@@ -2745,7 +2745,7 @@ HAL_StatusTypeDef HAL_SPI_Abort_IT(SPI_HandleTypeDef *hspi)
       }
       count--;      // Moved as part of the fix for the underflow
     } while (HAL_IS_BIT_SET(hspi->Instance->CR1, SPI_CR1_CSTART));
-    count = resetcount;     // Reset the count back to full for next loop part of the underflow fix
+    count = resetcount;     // Reset the count to its full value for the next loop as part of the underflow fix.
 
     /* Clear SUSP flag */
     __HAL_SPI_CLEAR_SUSPFLAG(hspi);
@@ -2758,7 +2758,7 @@ HAL_StatusTypeDef HAL_SPI_Abort_IT(SPI_HandleTypeDef *hspi)
       }
       count--;      // Moved as part of the fix for the underflow
     } while (__HAL_SPI_GET_FLAG(hspi, SPI_FLAG_SUSP));
-    count = resetcount;     // Reset the count back to full for next loop part of the underflow fix
+    count = resetcount;     // Reset the count to its full value for the next loop as part of the underflow fix.
   }
 
   /* If DMA Tx and/or DMA Rx Handles are associated to SPI Handle, DMA Abort complete callbacks should be initialized
